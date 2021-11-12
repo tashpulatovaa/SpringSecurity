@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>save user</title>
+</head>
+<body style="text-align: center">
+<div th:switch="${t}">
+    <h2 th:case="A">Add new User</h2>
+    <h2 th:case="U">Update User</h2>
+</div>
+<form
+        action="#"
+        th:action="@{/user/save}"
+        th:object="${user}"
+        method="post">
+
+    <input type="hidden" th:field="*{id}">
+    <input type="text"  name="name" th:field="*{name}" placeholder="name">
+    <br><br>
+    <input type="text"  name="surname" th:field="*{surname}" placeholder="surname">
+    <br><br>
+    <input type="text" name="username" th:field="*{username}" placeholder="username">
+    <br><br>
+    <input type="password" name="password" th:field="*{password}" placeholder="password">
+    <br><br>
+    <select name="authority" th:field="*{authority}">
+        <option th:each="auth : ${T(peaksoft.model.Authority).values()}"
+                th:value="${auth}"
+                th:text="${auth}"></option>
+    </select>
+    <br><br>
+    <input type="submit" value="Add User">
+</form>
+
+</body>
+</html>
